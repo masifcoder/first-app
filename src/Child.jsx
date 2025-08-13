@@ -1,14 +1,13 @@
 
 import Button from "./Button";
 
-function Child(props) {
-
+function Child({age, city, name}) {
 
 
     return(
         <>
-            <h3>Welcome, {props.name}</h3>
-            <h4>Your city is: {props.city}</h4>
+            <h3>Welcome, {name} and Age is: {age}</h3>
+            <h4>Your city is: {city}</h4>
             <Button />
         </>
     )
