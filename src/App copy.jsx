@@ -1,7 +1,6 @@
 
 // import area
 import { useState } from "react";
-import ReactLogo from "./assets/react.svg";
 
 
 // import css
@@ -31,25 +30,20 @@ function App() {
     profession: 'astrophysicist',
   }];
 
-  let listjsx = people.map((element) => {
-    if (element.profession == "chemist") {
-      return <li className="listitem" key={element.id}>
-        <img src={ReactLogo} />
-        <div>Name: {element.name}</div>
-        <div>Profession: {element.profession}</div>
-      </li>
-    }
-  });
-
 
 
   return (
     <>
       <h1 className="heading"> Count:</h1>
       <ul>
-        {
-          listjsx
-        }
+       {
+        people.map( (element) => {
+          return <li className="listitem" key={element.id}>
+            <div>Name: {element.name}</div>
+            <div>Profession: {element.profession}</div>
+          </li>
+        } )
+       }
       </ul>
 
     </>

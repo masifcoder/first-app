@@ -4,6 +4,8 @@ import Button from "./Button";
 function Child({age, city, name}) {
 
 
+
+    console.log("child rerender")
     return(
         <>
             <h3>Welcome, {name} and Age is: {age}</h3>
