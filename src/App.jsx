@@ -1,13 +1,16 @@
 import { useState } from "react"
 
+import Welcome from "./components/Welcome";
+import LoginForm from "./components/LoginForm";
+import Dashboard from "./components/Dashboard";
 
 
 
 function App() {
     const [email, setEmail] = useState("");
     const [pwd, setPwd] = useState("");
-    const [isLoggin, setIsLogin] = useState(false);
-    const [error, setError] =  useState("");
+    const [isLogin, setIsLogin] = useState(false);
+    const [error, setError] = useState("");
 
 
     const handleSubmit = (e) => {
@@ -17,7 +20,7 @@ function App() {
         let adminPwd = "123456";
 
         if (email == adminEmail && pwd == adminPwd) {
-           
+
             setEmail("");
             setPwd("");
             setError("");
@@ -27,28 +30,21 @@ function App() {
         }
     }
 
+    const sayHi = (name) => {
+        alert("welcome, " + name)
+    }
+
     return (
         <>
             {
-                isLoggin && "login hay"
+                isLogin && "login hay"
             }
 
             {
-                (isLoggin == true) ? <div>
-                    <h1>Welcome User</h1>
-                    <h4>This is your profile page.</h4>
-                    <button onClick={() => setIsLogin(false) }>Logout</button>
-                </div> : <div style={{ display: "flex", justifyContent: "center", border: "1px solid red", width: "600px", margin: "100px auto" }}>
-                    <form onSubmit={handleSubmit} >
-                        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} /> <br />
-                        <input type="password" value={pwd} onChange={(e) => setPwd(e.target.value)} /> <br />
-                        <p>{error}</p>
-                        <button>Login</button>
-                    </form>
-                </div>
+                (isLogin == true) ? <><Welcome sayHi={sayHi} setIsLogin={setIsLogin} name="Ali" /> </> : <LoginForm email={email} pwd={pwd} error={error} setEmail={setEmail} setPwd={setPwd} handleSubmit={handleSubmit} />
             }
 
-
+            <Dashboard isLogin={isLogin} />
 
         </>
     )
