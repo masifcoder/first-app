@@ -1,62 +1,57 @@
+import { useState } from "react"
 
-// import area
-import { useState } from "react";
-import ReactLogo from "./assets/react.svg";
-
-
-// import css
-import "./App.css";
-
-function App() {
-
-  const people = [{
-    id: 1,
-    name: 'Creola Katherine Johnson',
-    profession: 'mathematician',
-  }, {
-    id: 2,
-    name: 'Mario José Molina-Pasquel Henríquez',
-    profession: 'chemist',
-  }, {
-    id: 3,
-    name: 'Mohammad Abdus Salam',
-    profession: 'physicist',
-  }, {
-    id: 4,
-    name: 'Percy Lavon Julian',
-    profession: 'chemist',
-  }, {
-    id: 5,
-    name: 'Subrahmanyan Chandrasekhar',
-    profession: 'astrophysicist',
-  }];
-
-  let listjsx = people.map((element) => {
-    if (element.profession == "chemist") {
-      return <li className="listitem" key={element.id}>
-        <img src={ReactLogo} />
-        <div>Name: {element.name}</div>
-        <div>Profession: {element.profession}</div>
-      </li>
-    }
-  });
 
 
 
-  return (
-    <>
-      <h1 className="heading"> Count:</h1>
-      <ul>
-        {
-          listjsx
+function App() {
+    const [email, setEmail] = useState("");
+    const [pwd, setPwd] = useState("");
+    const [isLoggin, setIsLogin] = useState(false);
+    const [error, setError] =  useState("");
+
+
+    const handleSubmit = (e) => {
+
+        e.preventDefault();
+        let adminEmail = "ali@gmail.com";
+        let adminPwd = "123456";
+
+        if (email == adminEmail && pwd == adminPwd) {
+           
+            setEmail("");
+            setPwd("");
+            setError("");
+            setIsLogin(true);
+        } else {
+            setError("Invalid credentials");
         }
-      </ul>
+    }
 
-    </>
-  )
+    return (
+        <>
+            {
+                isLoggin && "login hay"
+            }
 
+            {
+                (isLoggin == true) ? <div>
+                    <h1>Welcome User</h1>
+                    <h4>This is your profile page.</h4>
+                    <button onClick={() => setIsLogin(false) }>Logout</button>
+                </div> : <div style={{ display: "flex", justifyContent: "center", border: "1px solid red", width: "600px", margin: "100px auto" }}>
+                    <form onSubmit={handleSubmit} >
+                        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} /> <br />
+                        <input type="password" value={pwd} onChange={(e) => setPwd(e.target.value)} /> <br />
+                        <p>{error}</p>
+                        <button>Login</button>
+                    </form>
+                </div>
+            }
+
+
+
+        </>
+    )
 }
-
-
 
 export default App;
